@@ -6,7 +6,7 @@ excludeJobs = [
     'kafka-connect-packaging',
 ]
 
-echo jobName
+echo jobName()
 
 for(kafkaConnectJob in Jenkins.instance.getAllItems()) {
     if(kafkaConnectJob.fullName =~ /jcustenborder\/kafka-connect-(.+)\/master/) {
