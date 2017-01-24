@@ -62,7 +62,7 @@ node {
     def text = "FROM ${baseImage}\n" +
             "MAINTAINER jcustenborder@gmail.com\n"
 
-    for archivedFile in archivedFiles {
+    for (archivedFile in archivedFiles) {
         text << "ADD ${archivedFile} /\n"
     }
 
