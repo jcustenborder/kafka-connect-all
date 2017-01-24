@@ -57,11 +57,12 @@ node {
         );
     }
 
-    def archivedFiles = findFiles(glob: 'target/*.tar.gz')
+
     String baseImage = 'confluentinc/cp-kafka-connect:3.1.1-1'
     def text = "FROM ${baseImage}\n" +
             "MAINTAINER jcustenborder@gmail.com\n"
 
+    def archivedFiles = findFiles(glob: '*.tar.gz')
     for (archivedFile in archivedFiles) {
         text << "ADD ${archivedFile} /\n"
     }
@@ -69,7 +70,7 @@ node {
     writeFile file: 'Dockerfile', text: text
     stash includes: 'Dockerfile', name: 'Dockerfile'
     archive 'Dockerfile'
-    def image
+    /* def image
 
     stage('docker') {
         image = docker.build("jcustenborder/kafka-connect-all")
@@ -77,5 +78,5 @@ node {
 
     image.push 'latest'
     image.push env.BUILD_NUMBER
-
+    */
 }
