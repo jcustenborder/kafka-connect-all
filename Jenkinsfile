@@ -72,10 +72,7 @@ node {
     def image
 
     stage('docker') {
-        dir('target') {
-            createDockerfile(artifactId, version)
-            image = docker.build("jcustenborder/kafka-connect-all")
-        }
+        image = docker.build("jcustenborder/kafka-connect-all")
     }
 
     image.push 'latest'
