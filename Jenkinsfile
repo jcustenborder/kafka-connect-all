@@ -3,14 +3,18 @@
 import jenkins.model.*
 
 excludeJobs = [
-    'kafka-connect-packaging',
+    'jcustenborder/kafka-connect-all/master',
+    'jcustenborder/kafka-connect-packaging/master'
 ]
 
 echo env.JOB_NAME
 
 for(kafkaConnectJob in Jenkins.instance.getAllItems()) {
     if(kafkaConnectJob.fullName =~ /jcustenborder\/kafka-connect-(.+)\/master/ &&
-        kafkaConnectJob.fullName != env.JOB_NAME) {
+        !env.JOB_NAME in excludeJobs) {
+
+
+
 
         echo kafkaConnectJob.fullName
     }
