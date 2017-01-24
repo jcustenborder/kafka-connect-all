@@ -19,8 +19,6 @@ for(job in Jenkins.instance.getAllItems()) {
         continue
     }
 
-    def connectorName = m.group(1)
-
     parallelSteps[jobName] = {
         build(jobName)
     }
