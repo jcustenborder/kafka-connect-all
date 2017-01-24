@@ -50,7 +50,7 @@ parallel(parallelSteps)
 node {
     deleteDir()
 
-    mkdir('target')
+    sh('mkdir target')
     dir('target') {
         for(jobName in jobs) {
             step ([$class: 'CopyArtifact',
