@@ -7,14 +7,20 @@ excludeJobs = [
     'jcustenborder/kafka-connect-packaging/master'
 ]
 
+def parallelSteps = [:]
+
 for(job in Jenkins.instance.getAllItems()) {
     if(job.fullName in excludeJobs) {
         echo "${job.fullName} in excludeJobs."
         continue
     }
-    if(!(job.fullName =~ /jcustenborder\/kafka-connect-(.+)\/master/)) {
+
+    m = (job.fullName =~ /jcustenborder\/kafka-connect-(.+)\/master/)
+
+    if(!m) {
         echo "${job.fullName} doesn't match pattern."
         continue
     }
-    echo "Processing ${job.fullName}."
+
+    echo "Processing ${m.group(1)}."
 }
