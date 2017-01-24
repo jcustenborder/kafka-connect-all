@@ -9,13 +9,13 @@ excludeJobs = [
 
 echo env.JOB_NAME
 
-for(kafkaConnectJob in Jenkins.instance.getAllItems()) {
-    if(kafkaConnectJob.fullName =~ /jcustenborder\/kafka-connect-(.+)\/master/ &&
-        !kafkaConnectJob.fullName in excludeJobs) {
-
-
-
-
-        echo kafkaConnectJob.fullName
+Jenkins.instance.getAllItems().eachJob { job ->
+    if(!(kafkaConnectJob.fullName =~ /jcustenborder\/kafka-connect-(.+)\/master/)) {
+        return
     }
+    if(env.JOB_NAME in excludeJobs) {
+        return
+    }
+
+    echo kafkaConnectJob.fullName
 }
