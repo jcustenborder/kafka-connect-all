@@ -14,7 +14,7 @@ for(job in Jenkins.instance.getAllItems()) {
     }
     if(!(job.fullName =~ /jcustenborder\/kafka-connect-(.+)\/master/)) {
         echo "${job.fullName} doesn't match pattern."
-        return
+        continue
     }
     echo "Processing ${job.fullName}."
 }
