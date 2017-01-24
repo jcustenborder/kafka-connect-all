@@ -68,7 +68,7 @@ node {
 
     writeFile file: 'Dockerfile', text: text
     stash includes: 'Dockerfile', name: 'Dockerfile'
-
+    archive 'Dockerfile'
     def image
 
     stage('docker') {
