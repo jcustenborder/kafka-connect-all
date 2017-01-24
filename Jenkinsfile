@@ -15,16 +15,13 @@ for(job in Jenkins.instance.getAllItems()) {
         continue
     }
 
-    m = (jobName =~ /jcustenborder\/kafka-connect-(.+)\/master/)
-
-    if(!m) {
+    if(!(jobName =~ /jcustenborder\/kafka-connect-(.+)\/master/)) {
         continue
     }
 
     def connectorName = m.group(1)
 
-
-    parallelSteps[connectorName] = {
+    parallelSteps[jobName] = {
         build(jobName)
     }
 }
