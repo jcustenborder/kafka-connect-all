@@ -62,11 +62,10 @@ node {
     def text = "FROM ${baseImage}\n" +
             "MAINTAINER jcustenborder@gmail.com\n"
 
-    dir('target') {
-        def archivedFiles = findFiles(glob: '**/*.tar.gz')
-        for (archivedFile in archivedFiles) {
-            text << "ADD ${archivedFile} /\n"
-        }
+    sh 'ls -1 target/*.tar.gz > archives.txt'
+    def archivesList = readFile('archives.txt').split("\\n")
+    for (archivedFile in archivesList) {
+        text << "ADD ${archivedFile} /\n"
     }
 
     writeFile file: 'Dockerfile', text: text
