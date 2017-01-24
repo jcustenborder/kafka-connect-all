@@ -11,16 +11,21 @@ def parallelSteps = [:]
 
 for(job in Jenkins.instance.getAllItems()) {
     if(job.fullName in excludeJobs) {
-        echo "${job.fullName} in excludeJobs."
         continue
     }
 
     m = (job.fullName =~ /jcustenborder\/kafka-connect-(.+)\/master/)
 
     if(!m) {
-        echo "${job.fullName} doesn't match pattern."
         continue
     }
 
-    echo "Processing ${m.group(1)}."
+    def connectorName = m.group(1)
+
+
+    parallelSteps[connectorName] = {
+        build(job.fullName)
+    }
 }
+
+parallel(parallelSteps)
