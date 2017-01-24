@@ -11,8 +11,8 @@ for(job in Jenkins.instance.getAllItems()) {
     if(job.fullName in excludeJobs) {
         continue
     }
-    if(!(kafkaConnectJob.fullName =~ /jcustenborder\/kafka-connect-(.+)\/master/)) {
+    if(!(job.fullName =~ /jcustenborder\/kafka-connect-(.+)\/master/)) {
         return
     }
-    echo kafkaConnectJob.fullName
+    echo job.fullName
 }
