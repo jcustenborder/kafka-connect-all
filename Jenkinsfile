@@ -50,13 +50,35 @@ parallel(parallelSteps)
 node {
     deleteDir()
 
-    sh('mkdir target')
-
     for(jobName in jobs) {
         step ([$class: 'CopyArtifact',
             projectName: jobName,
             filter: 'target/*.tar.gz']
         );
     }
-    archive 'target/*.tar.gz'
+
+    def archivedFiles = findFiles('target/*.tar.gz')
+
+    def text = "FROM ${baseImage}\n" +
+            "MAINTAINER jcustenborder@gmail.com\n"
+
+    for archivedFile in archivedFiles {
+        text << "ADD ${archivedFile} /\n"
+    }
+
+    writeFile file: 'Dockerfile', text: text
+    stash includes: 'Dockerfile', name: 'Dockerfile'
+
+    def image
+
+    stage('docker') {
+        dir('target') {
+            createDockerfile(artifactId, version)
+            image = docker.build("jcustenborder/kafka-connect-all")
+        }
+    }
+
+    image.push 'latest'
+    image.push env.BUILD_NUMBER
+
 }
