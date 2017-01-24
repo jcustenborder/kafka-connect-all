@@ -9,10 +9,12 @@ excludeJobs = [
 
 for(job in Jenkins.instance.getAllItems()) {
     if(job.fullName in excludeJobs) {
+        echo "${job.fullName} in excludeJobs."
         continue
     }
     if(!(job.fullName =~ /jcustenborder\/kafka-connect-(.+)\/master/)) {
+        echo "${job.fullName} doesn't match pattern."
         return
     }
-    echo job.fullName
+    echo "Processing ${job.fullName}."
 }
