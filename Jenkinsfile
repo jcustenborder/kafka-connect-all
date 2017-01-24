@@ -23,6 +23,7 @@ def jobsToBuild() {
             continue
         }
 
+        echo "Adding ${jobName}"
         result << jobName
     }
 }
