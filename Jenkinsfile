@@ -7,7 +7,7 @@ excludeJobs = [
     'jcustenborder/kafka-connect-packaging/master'
 ]
 
-def parallelSteps = [:]
+
 
 @NonCPS
 def jobsToBuild() {
@@ -26,7 +26,11 @@ def jobsToBuild() {
         echo "Adding ${jobName}"
         result << jobName
     }
+
+    return result
 }
+
+def parallelSteps = [:]
 
 for(jobName in jobsToBuild()) {
     parallelSteps[jobName] = {
