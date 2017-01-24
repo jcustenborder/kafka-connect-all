@@ -34,12 +34,30 @@ def jobsToBuild() {
     return result
 }
 
+def jobs = jobsToBuild()
+/*
 def parallelSteps = [:]
 
-for(jobName in jobsToBuild()) {
+for(jobName in jobs) {
     parallelSteps[jobName] = {
         build(jobName)
     }
 }
 
 parallel(parallelSteps)
+*/
+
+node {
+    deleteDir()
+
+    mkdir('target')
+    dir('target') {
+        for(jobName in jobs) {
+            step ([$class: 'CopyArtifact',
+                projectName: jobName,
+                filter: '*.tar.gz']
+            );
+        }
+        archive '*.tar.gz'
+    }
+}
