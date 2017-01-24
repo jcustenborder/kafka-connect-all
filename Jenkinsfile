@@ -8,11 +8,14 @@ excludeJobs = [
 ]
 
 
-
 @NonCPS
 def jobsToBuild() {
-    def result = []
+    def result = [
+        'jcustenborder/kafka-connect-twitter/master',
+        'jcustenborder/kafka-connect-simulator/master'
+    ]
 
+/*
     for(job in Jenkins.instance.getAllItems()) {
         def jobName = job.fullName
         if(jobName in excludeJobs) {
@@ -26,6 +29,7 @@ def jobsToBuild() {
         echo "Adding ${jobName}"
         result << jobName
     }
+*/
 
     return result
 }
