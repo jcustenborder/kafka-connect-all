@@ -57,7 +57,7 @@ node {
         );
     }
 
-    def archivedFiles = findFiles((glob: 'target/*.tar.gz')
+    def archivedFiles = findFiles(glob: 'target/*.tar.gz')
 
     def text = "FROM ${baseImage}\n" +
             "MAINTAINER jcustenborder@gmail.com\n"
