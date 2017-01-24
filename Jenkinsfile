@@ -63,15 +63,16 @@ node {
             "MAINTAINER jcustenborder@gmail.com\n"
 
     sh 'ls -1 target/*.tar.gz > archives.txt'
-    def archivesList = readFile('archives.txt').split("\\n")
+    def archivesList = readFile('archives.txt').split("\\r?\\n")
     for (archivedFile in archivesList) {
-        text << "ADD ${archivedFile} /\n"
+        echo "ADD ${archivedFile}"
+        text += "ADD ${archivedFile} /\n"
     }
 
     writeFile file: 'Dockerfile', text: text
     stash includes: 'Dockerfile', name: 'Dockerfile'
     archive 'Dockerfile'
-    /* def image
+    def image
 
     stage('docker') {
         image = docker.build("jcustenborder/kafka-connect-all")
@@ -79,5 +80,4 @@ node {
 
     image.push 'latest'
     image.push env.BUILD_NUMBER
-    */
 }
