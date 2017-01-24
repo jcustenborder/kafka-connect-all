@@ -16,6 +16,6 @@ def jobs(jobRegexp) {
 
 kafkaConnectJobs = jobs('^kafka-connect-')
 
-for(kafkaConnectJob: kafkaConnectJobs) {
+for(kafkaConnectJob in kafkaConnectJobs) {
     echo kafkaConnectJob.fullName
 }
