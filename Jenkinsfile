@@ -10,11 +10,12 @@ excludeJobs = [
 def parallelSteps = [:]
 
 for(job in Jenkins.instance.getAllItems()) {
-    if(job.fullName in excludeJobs) {
+    def jobName = job.fullName
+    if(jobName in excludeJobs) {
         continue
     }
 
-    m = (job.fullName =~ /jcustenborder\/kafka-connect-(.+)\/master/)
+    m = (jobName =~ /jcustenborder\/kafka-connect-(.+)\/master/)
 
     if(!m) {
         continue
@@ -24,7 +25,7 @@ for(job in Jenkins.instance.getAllItems()) {
 
 
     parallelSteps[connectorName] = {
-        build(job.fullName)
+        build(jobName)
     }
 }
 
