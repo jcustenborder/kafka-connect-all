@@ -58,7 +58,7 @@ node {
     }
 
     def archivedFiles = findFiles(glob: 'target/*.tar.gz')
-
+    String baseImage = 'confluentinc/cp-kafka-connect:3.1.1-1'
     def text = "FROM ${baseImage}\n" +
             "MAINTAINER jcustenborder@gmail.com\n"
 
