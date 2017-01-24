@@ -51,13 +51,12 @@ node {
     deleteDir()
 
     sh('mkdir target')
-    dir('target') {
-        for(jobName in jobs) {
-            step ([$class: 'CopyArtifact',
-                projectName: jobName,
-                filter: '*.tar.gz']
-            );
-        }
-        archive '*.tar.gz'
+
+    for(jobName in jobs) {
+        step ([$class: 'CopyArtifact',
+            projectName: jobName,
+            filter: 'target/*.tar.gz']
+        );
     }
+    archive 'target/*.tar.gz'
 }
