@@ -11,6 +11,8 @@ excludeJobs = [
 
 @NonCPS
 def jobsToBuild() {
+    result = []
+
     for(job in Jenkins.instance.getAllItems()) {
         def jobName = job.fullName
         if(jobName in excludeJobs) {
