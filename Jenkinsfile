@@ -4,18 +4,13 @@ import jenkins.model.*
 
 excludeJobs = [
     'jcustenborder/kafka-connect-all/master',
-    'jcustenborder/kafka-connect-packaging/master'
+    'jcustenborder/kafka-connect-packaging/master',
+    'jcustenborder/kafka-connect-spooldir/master'
 ]
 
 
 @NonCPS
 def jobsToBuild() {
-    def result = [
-        'jcustenborder/kafka-connect-twitter/master',
-        'jcustenborder/kafka-connect-simulator/master'
-    ]
-
-/*
     for(job in Jenkins.instance.getAllItems()) {
         def jobName = job.fullName
         if(jobName in excludeJobs) {
@@ -29,13 +24,12 @@ def jobsToBuild() {
         echo "Adding ${jobName}"
         result << jobName
     }
-*/
 
     return result
 }
 
 def jobs = jobsToBuild()
-/*
+
 def parallelSteps = [:]
 
 for(jobName in jobs) {
@@ -45,7 +39,6 @@ for(jobName in jobs) {
 }
 
 parallel(parallelSteps)
-*/
 
 node {
     deleteDir()
