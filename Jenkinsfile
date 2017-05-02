@@ -5,7 +5,8 @@ import jenkins.model.*
 excludeJobs = [
     'jcustenborder/kafka-connect-all/master',
     'jcustenborder/kafka-connect-packaging/master',
-    'jcustenborder/kafka-connect-spooldir/master'
+    'jcustenborder/kafka-connect-spooldir/master',
+    'jcustenborder/kafka-connect-all/master'
 ]
 
 
