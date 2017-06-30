@@ -5,7 +5,6 @@ import jenkins.model.*
 excludeJobs = [
     'jcustenborder/kafka-connect-all/master',
     'jcustenborder/kafka-connect-packaging/master',
-    'jcustenborder/kafka-connect-spooldir/master',
     'jcustenborder/kafka-connect-archtype/master'
 ]
 
@@ -54,7 +53,7 @@ node {
     }
 
 
-    String baseImage = 'confluentinc/cp-kafka-connect:3.1.1-1'
+    String baseImage = 'confluentinc/cp-kafka-connect:3.2.2-1'
     def text = "FROM ${baseImage}\n" +
             "MAINTAINER jcustenborder@gmail.com\n"
 
