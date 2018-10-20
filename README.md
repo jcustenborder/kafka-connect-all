@@ -4,4 +4,5 @@ This project is a collection of my connectors and transformations that are hoste
 
 | Project | Version | Documentation | Source |
 |---------|---------|---------------|--------|
-| jcustenborder/kafka-connect-transform-xml | 0.1.0.11 | [Documentation](https://jcustenborder.github.io/kafka-connect-documentation/) | [Source](https://github.com/jcustenborder/kafka-connect-transform-xml) |
+| jcustenborder/kafka-connect-transform-common | 0.1.0.24 | [Documentation](https://jcustenborder.github.io/kafka-connect-documentation/) | [Source](https://github.com/jcustenborder/kafka-connect-transform-common) |
+| jcustenborder/kafka-connect-transform-xml | 0.1.0.12 | [Documentation](https://jcustenborder.github.io/kafka-connect-documentation/) | [Source](https://github.com/jcustenborder/kafka-connect-transform-xml) |
